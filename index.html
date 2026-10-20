@@ -11,13 +11,13 @@ body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#eef2ff;color:#1118
 .sc{min-height:100vh;padding:14px;padding-bottom:96px}
 .tb{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .tb h1{margin:0;font-size:1.15rem}
-.bk{border:0;background:#e5e7eb;color:#374151;padding:8px 14px;border-radius:999px;font-family:inherit;font-weight:bold}
+.bk{border:0;background:#e5e7eb;color:#374151;padding:8px 14px;border-radius:999px;font-family:inherit;font-weight:bold;cursor:pointer}
 .hero{background:linear-gradient(135deg,#6366f1,#0ea5e9 55%,#06b6d4);color:#fff;border-radius:24px;padding:22px;margin-bottom:18px;box-shadow:0 12px 28px rgba(99,102,241,.28)}
 .hero h2{margin:0 0 6px;font-size:1.5rem}
 .hero p{margin:0;opacity:.95}
 .pill{display:inline-block;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:999px;font-size:.78rem;margin-top:10px}
 .gm{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.mc{background:linear-gradient(180deg,#fff,#f8fafc);border:0;border-radius:22px;padding:20px 12px 16px;text-align:center;box-shadow:0 10px 24px rgba(15,23,42,.1);width:100%;font-family:inherit}
+.mc{background:linear-gradient(180deg,#fff,#f8fafc);border:0;border-radius:22px;padding:20px 12px 16px;text-align:center;box-shadow:0 10px 24px rgba(15,23,42,.1);width:100%;font-family:inherit;cursor:pointer}
 .mc:active{transform:scale(.97)}
 .iw{width:64px;height:64px;border-radius:20px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;box-shadow:0 8px 16px rgba(0,0,0,.18),inset 0 -3px 0 rgba(0,0,0,.12)}
 .mc b{display:block;font-size:1rem;color:#0f172a}
@@ -34,7 +34,7 @@ label{display:block;font-size:.85rem;color:#4b5563;margin:10px 0 4px}
 input{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:12px;font-family:inherit;font-size:15px}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .act{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
-.p,.s,.d,.o,.m{border:0;border-radius:12px;padding:12px;font-family:inherit;font-weight:bold;font-size:.92rem}
+.p,.s,.d,.o,.m{border:0;border-radius:12px;padding:12px;font-family:inherit;font-weight:bold;font-size:.92rem;cursor:pointer}
 .p{background:#16a34a;color:#fff}
 .s{background:#4f46e5;color:#fff}
 .d{background:#dc2626;color:#fff}
@@ -51,11 +51,13 @@ th{background:#f9fafb}
 .modal.on{display:flex}
 .mbox{background:#fff;border-radius:16px;padding:18px;width:100%;max-width:420px}
 .bn{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5e7eb;display:grid;grid-template-columns:repeat(4,1fr);padding:6px 2px;z-index:40;box-shadow:0 -4px 16px rgba(0,0,0,.06)}
-.bn button{border:0;background:transparent;font-family:inherit;font-size:.75rem;color:#6b7280;padding:8px 2px}
+.bn button{border:0;background:transparent;font-family:inherit;font-size:.75rem;color:#6b7280;padding:8px 2px;cursor:pointer}
 .bn button.on{color:#4f46e5;font-weight:bold}
+#jsok{display:none;background:#dcfce7;color:#166534;text-align:center;padding:6px;font-size:.8rem;font-weight:bold}
 </style>
 </head>
 <body>
+<div id="jsok">جاوااسکریپت فعال است ✓</div>
 <div id="trial" class="trial hid"></div>
 
 <section id="sc-home" class="sc">
@@ -65,17 +67,17 @@ th{background:#f9fafb}
     <div class="pill">آزمایشی ۷ روزه</div>
   </div>
   <div class="gm">
-    <button type="button" class="mc" data-go="new"><div class="iw c1">📝</div><b>ثبت چک</b><span>ورود و چاپ</span></button>
-    <button type="button" class="mc" data-go="list"><div class="iw c2">💾</div><b>ذخیره‌شده‌ها</b><span>بارگذاری و حذف</span></button>
-    <button type="button" class="mc" data-go="report"><div class="iw c3">📊</div><b>گزارش‌گیری</b><span>جستجو و چاپ</span></button>
-    <button type="button" class="mc" data-go="print"><div class="iw c4">🖨️</div><b>چاپ سریع</b><span>پیش‌نمایش</span></button>
-    <button type="button" class="mc" data-go="calib"><div class="iw c5">⚙️</div><b>کالیبراسیون</b><span>تنظیم چاپ</span></button>
-    <button type="button" class="mc" data-go="backup"><div class="iw c6">☁️</div><b>پشتیبان</b><span>تهیه و بازیابی</span></button>
+    <button type="button" class="mc" id="btn-new"><div class="iw c1">📝</div><b>ثبت چک</b><span>ورود و چاپ</span></button>
+    <button type="button" class="mc" id="btn-list"><div class="iw c2">💾</div><b>ذخیره‌شده‌ها</b><span>بارگذاری و حذف</span></button>
+    <button type="button" class="mc" id="btn-report"><div class="iw c3">📊</div><b>گزارش‌گیری</b><span>جستجو و چاپ</span></button>
+    <button type="button" class="mc" id="btn-print"><div class="iw c4">🖨️</div><b>چاپ سریع</b><span>پیش‌نمایش</span></button>
+    <button type="button" class="mc" id="btn-calib"><div class="iw c5">⚙️</div><b>کالیبراسیون</b><span>تنظیم چاپ</span></button>
+    <button type="button" class="mc" id="btn-backup"><div class="iw c6">☁️</div><b>پشتیبان</b><span>تهیه و بازیابی</span></button>
   </div>
 </section>
 
 <section id="sc-new" class="sc hid">
-  <div class="tb"><h1>ثبت چک</h1><button type="button" class="bk" data-go="home">بازگشت</button></div>
+  <div class="tb"><h1>ثبت چک</h1><button type="button" class="bk" id="back1">بازگشت</button></div>
   <div class="card">
     <h3>اطلاعات چک</h3>
     <label>نام بانک</label><input id="bank" type="text">
@@ -94,8 +96,8 @@ th{background:#f9fafb}
       <span> روز قبل</span>
     </div>
     <div class="act">
-      <button type="button" class="p" data-act="print">چاپ چک</button>
-      <button type="button" class="s" data-act="save">ذخیره</button>
+      <button type="button" class="p" id="do-print">چاپ چک</button>
+      <button type="button" class="s" id="do-save">ذخیره</button>
     </div>
   </div>
   <div class="card">
@@ -109,12 +111,12 @@ th{background:#f9fafb}
 </section>
 
 <section id="sc-list" class="sc hid">
-  <div class="tb"><h1>چک‌های ذخیره‌شده</h1><button type="button" class="bk" data-go="home">بازگشت</button></div>
+  <div class="tb"><h1>چک‌های ذخیره‌شده</h1><button type="button" class="bk" id="back2">بازگشت</button></div>
   <div class="card"><div id="listbox"><p>هنوز چکی ذخیره نشده است.</p></div></div>
 </section>
 
 <section id="sc-report" class="sc hid">
-  <div class="tb"><h1>گزارش‌گیری</h1><button type="button" class="bk" data-go="home">بازگشت</button></div>
+  <div class="tb"><h1>گزارش‌گیری</h1><button type="button" class="bk" id="back3">بازگشت</button></div>
   <div class="card">
     <label>نام بانک</label><input id="fb" type="text">
     <label>سری</label><input id="fse" type="text">
@@ -125,50 +127,50 @@ th{background:#f9fafb}
     </div>
     <label>در وجه</label><input id="fp" type="text">
     <div class="act">
-      <button type="button" class="m" data-act="search">جستجو</button>
-      <button type="button" class="o" data-act="printrep">چاپ گزارش</button>
+      <button type="button" class="m" id="do-search">جستجو</button>
+      <button type="button" class="o" id="do-printrep">چاپ گزارش</button>
     </div>
-    <button type="button" class="d" style="width:100%;margin-top:8px" data-act="resetrep">شروع مجدد</button>
+    <button type="button" class="d" style="width:100%;margin-top:8px" id="do-resetrep">شروع مجدد</button>
   </div>
   <div class="card"><div id="repbox"><p>برای مشاهده گزارش، جستجو کنید.</p></div></div>
 </section>
 
 <section id="sc-print" class="sc hid">
-  <div class="tb"><h1>چاپ سریع</h1><button type="button" class="bk" data-go="home">بازگشت</button></div>
+  <div class="tb"><h1>چاپ سریع</h1><button type="button" class="bk" id="back4">بازگشت</button></div>
   <div class="card">
     <p class="note">ابتدا از ثبت چک اطلاعات را وارد کنید.</p>
     <div id="pwrap"></div>
     <div class="act">
-      <button type="button" class="p" data-act="print">چاپ چک</button>
-      <button type="button" class="s" data-go="new">ویرایش</button>
+      <button type="button" class="p" id="do-print2">چاپ چک</button>
+      <button type="button" class="s" id="to-new">ویرایش</button>
     </div>
   </div>
 </section>
 
 <section id="sc-calib" class="sc hid">
-  <div class="tb"><h1>کالیبراسیون</h1><button type="button" class="bk" data-go="home">بازگشت</button></div>
+  <div class="tb"><h1>کالیبراسیون</h1><button type="button" class="bk" id="back5">بازگشت</button></div>
   <div class="card">
     <p class="note">موقعیت فیلدها (پیکسل)</p>
     <div id="calbox"></div>
-    <button type="button" class="d" style="width:100%;margin-top:10px" data-act="resetcal">بازنشانی</button>
+    <button type="button" class="d" style="width:100%;margin-top:10px" id="do-resetcal">بازنشانی</button>
   </div>
 </section>
 
 <section id="sc-backup" class="sc hid">
-  <div class="tb"><h1>پشتیبان</h1><button type="button" class="bk" data-go="home">بازگشت</button></div>
+  <div class="tb"><h1>پشتیبان</h1><button type="button" class="bk" id="back6">بازگشت</button></div>
   <div class="card">
-    <button type="button" class="s" style="width:100%;margin-bottom:8px" data-act="backup">تهیه پشتیبان</button>
-    <label class="p" style="display:block;text-align:center;padding:12px;border-radius:12px">بازیابی
+    <button type="button" class="s" style="width:100%;margin-bottom:8px" id="do-backup">تهیه پشتیبان</button>
+    <label class="p" style="display:block;text-align:center;padding:12px;border-radius:12px;cursor:pointer">بازیابی
       <input id="rfile" type="file" accept=".json" style="display:none">
     </label>
   </div>
 </section>
 
 <nav class="bn">
-  <button type="button" class="on" data-go="home" id="n-home">خانه</button>
-  <button type="button" data-go="new" id="n-new">ثبت</button>
-  <button type="button" data-go="report" id="n-report">گزارش</button>
-  <button type="button" data-go="list" id="n-list">ذخیره</button>
+  <button type="button" class="on" id="n-home">خانه</button>
+  <button type="button" id="n-new">ثبت</button>
+  <button type="button" id="n-report">گزارش</button>
+  <button type="button" id="n-list">ذخیره</button>
 </nav>
 
 <div id="amodal" class="modal">
@@ -176,276 +178,509 @@ th{background:#f9fafb}
     <h2 style="margin-top:0">فعال‌سازی</h2>
     <p>دوره آزمایشی تمام شده.</p>
     <label>شناسه</label><input id="mid" readonly>
-    <button type="button" class="m" style="width:100%;margin:8px 0" data-act="copyid">کپی شناسه</button>
+    <button type="button" class="m" style="width:100%;margin:8px 0" id="do-copyid">کپی شناسه</button>
     <label>کلید</label><input id="lkey" placeholder="XXXXXX-XXXXXX-XXXXXX-XXXXXX">
-    <button type="button" class="p" style="width:100%;margin-top:10px" data-act="activate">فعال‌سازی</button>
+    <button type="button" class="p" style="width:100%;margin-top:10px" id="do-activate">فعال‌سازی</button>
   </div>
 </div>
 <div id="rmodal" class="modal">
   <div class="mbox">
     <h2 style="color:#dc2626;margin-top:0">هشدار سررسید</h2>
     <p id="rtxt"></p>
-    <button type="button" class="s" style="width:100%" data-act="closerem">متوجه شدم</button>
+    <button type="button" class="s" style="width:100%" id="do-closerem">متوجه شدم</button>
   </div>
 </div>
 
 <script>
-(function(){
-var mem={}, can=false;
-try{localStorage.setItem("__t","1");localStorage.removeItem("__t");can=true;}catch(e){can=false;}
-var store={
-  get:function(k){try{if(can)return localStorage.getItem(k);}catch(e){}return mem.hasOwnProperty(k)?mem[k]:null;},
-  set:function(k,v){try{if(can){localStorage.setItem(k,v);return;}}catch(e){}mem[k]=String(v);},
-  del:function(k){try{if(can){localStorage.removeItem(k);return;}}catch(e){}delete mem[k];}
-};
-var LK="app_license_token", TK="app_trial_start", TD=7, CK="chequeCalibrationV3";
-var def={date:{top:8,left:120,fontSize:13},dateWords:{top:28,left:10,fontSize:12},payee:{top:52,left:20,fontSize:13},amountWords:{top:78,left:20,fontSize:12},nationalId:{top:110,left:20,fontSize:12},amountNumbers:{top:110,left:140,fontSize:13}};
-var settings=null;
-try{settings=JSON.parse(store.get(CK));}catch(e){settings=null;}
-if(!settings)settings=JSON.parse(JSON.stringify(def));
-function $(id){return document.getElementById(id);}
-function v(id){var n=$(id);return n?String(n.value||"").trim():"";}
-function go(name){
-  var sc=["home","new","list","report","print","calib","backup"];
-  for(var i=0;i<sc.length;i++){
-    var n=$("sc-"+sc[i]);
-    if(!n)continue;
-    if(sc[i]===name)n.classList.remove("hid");else n.classList.add("hid");
-  }
-  var nav=document.querySelectorAll(".bn button");
-  for(var j=0;j<nav.length;j++)nav[j].classList.remove("on");
-  if(name==="home"&&$("n-home"))$("n-home").classList.add("on");
-  if(name==="new"&&$("n-new"))$("n-new").classList.add("on");
-  if(name==="report"&&$("n-report"))$("n-report").classList.add("on");
-  if(name==="list"&&$("n-list"))$("n-list").classList.add("on");
-  if(name==="list")renderList();
-  if(name==="print")$("pwrap").innerHTML=$("cbox").outerHTML;
-  if(name==="calib")renderCal();
-  window.scrollTo(0,0);
+var mem = {};
+var can = false;
+try {
+  localStorage.setItem("__t", "1");
+  localStorage.removeItem("__t");
+  can = true;
+} catch (e) {
+  can = false;
 }
-function eng(str){
-  var s=String(str||""),fa="۰۱۲۳۴۵۶۷۸۹",ar="٠١٢٣٤٥٦٧٨٩",o="";
-  for(var i=0;i<s.length;i++){
-    var c=s.charAt(i),fi=fa.indexOf(c),ai=ar.indexOf(c);
-    if(fi>=0)o+=String(fi);else if(ai>=0)o+=String(ai);else o+=c;
+var store = {
+  get: function (k) {
+    try { if (can) return localStorage.getItem(k); } catch (e) {}
+    return Object.prototype.hasOwnProperty.call(mem, k) ? mem[k] : null;
+  },
+  set: function (k, v) {
+    try { if (can) { localStorage.setItem(k, v); return; } } catch (e) {}
+    mem[k] = String(v);
+  },
+  del: function (k) {
+    try { if (can) { localStorage.removeItem(k); return; } } catch (e) {}
+    delete mem[k];
+  }
+};
+
+var LK = "app_license_token";
+var TK = "app_trial_start";
+var TD = 7;
+var CK = "chequeCalibrationV3";
+var def = {
+  date: { top: 8, left: 120, fontSize: 13 },
+  dateWords: { top: 28, left: 10, fontSize: 12 },
+  payee: { top: 52, left: 20, fontSize: 13 },
+  amountWords: { top: 78, left: 20, fontSize: 12 },
+  nationalId: { top: 110, left: 20, fontSize: 12 },
+  amountNumbers: { top: 110, left: 140, fontSize: 13 }
+};
+var settings = null;
+try { settings = JSON.parse(store.get(CK)); } catch (e) { settings = null; }
+if (!settings) settings = JSON.parse(JSON.stringify(def));
+
+function $(id) { return document.getElementById(id); }
+function v(id) {
+  var n = $(id);
+  return n ? String(n.value || "").trim() : "";
+}
+
+function go(name) {
+  var sc = ["home", "new", "list", "report", "print", "calib", "backup"];
+  for (var i = 0; i < sc.length; i++) {
+    var n = $("sc-" + sc[i]);
+    if (!n) continue;
+    if (sc[i] === name) n.classList.remove("hid");
+    else n.classList.add("hid");
+  }
+  var nav = document.querySelectorAll(".bn button");
+  for (var j = 0; j < nav.length; j++) nav[j].classList.remove("on");
+  if (name === "home" && $("n-home")) $("n-home").classList.add("on");
+  if (name === "new" && $("n-new")) $("n-new").classList.add("on");
+  if (name === "report" && $("n-report")) $("n-report").classList.add("on");
+  if (name === "list" && $("n-list")) $("n-list").classList.add("on");
+  if (name === "list") renderList();
+  if (name === "print") $("pwrap").innerHTML = $("cbox").outerHTML;
+  if (name === "calib") renderCal();
+  window.scrollTo(0, 0);
+}
+
+function eng(str) {
+  var s = String(str || "");
+  var fa = "۰۱۲۳۴۵۶۷۸۹";
+  var ar = "٠١٢٣٤٥٦٧٨٩";
+  var o = "";
+  for (var i = 0; i < s.length; i++) {
+    var c = s.charAt(i);
+    var fi = fa.indexOf(c);
+    var ai = ar.indexOf(c);
+    if (fi >= 0) o += String(fi);
+    else if (ai >= 0) o += String(ai);
+    else o += c;
   }
   return o;
 }
-function mid(){
-  var raw=(navigator.userAgent||"")+"|"+(screen.width||"")+"x"+(screen.height||"");
-  try{return btoa(raw).replace(/[^A-Z0-9]/gi,"").slice(0,24).toUpperCase();}
-  catch(e){return "DEVICEFALLBACK00000001";}
+
+function mid() {
+  var raw = String(navigator.userAgent || "") + "|" + String(screen.width || "") + "x" + String(screen.height || "");
+  try {
+    return btoa(raw).replace(/[^A-Z0-9]/gi, "").slice(0, 24).toUpperCase();
+  } catch (e) {
+    return "DEVICEFALLBACK00000001";
+  }
 }
-function checkAct(){
-  var id=mid(), st=store.get(LK);
-  if(st&&store.get("machine_bound")===id)return true;
-  var ts=store.get(TK);
-  if(!ts){ts=String(Date.now());store.set(TK,ts);}
-  var days=(Date.now()-Number(ts))/(1000*3600*24);
-  if(days<TD){
-    var left=Math.ceil(TD-days);
-    $("trial").textContent="نسخه آزمایشی — "+left+" روز باقی‌مانده";
+
+function checkAct() {
+  var id = mid();
+  var st = store.get(LK);
+  if (st && store.get("machine_bound") === id) return true;
+  var ts = store.get(TK);
+  if (!ts) {
+    ts = String(Date.now());
+    store.set(TK, ts);
+  }
+  var days = (Date.now() - Number(ts)) / (1000 * 3600 * 24);
+  if (days < TD) {
+    var left = Math.ceil(TD - days);
+    $("trial").textContent = "نسخه آزمایشی — " + left + " روز باقی‌مانده";
     $("trial").classList.remove("hid");
     return true;
   }
-  $("mid").value=id;
+  $("mid").value = id;
   $("amodal").classList.add("on");
   return false;
 }
-function applyPos(){
-  var map={pd:"date",pdw:"dateWords",pp:"payee",paw:"amountWords",pn:"nationalId",pan:"amountNumbers"};
-  for(var id in map){
-    var n=$(id);if(!n)continue;
-    var s=settings[map[id]];
-    n.style.top=s.top+"px";n.style.left=s.left+"px";n.style.fontSize=s.fontSize+"px";
+
+function applyPos() {
+  var map = { pd: "date", pdw: "dateWords", pp: "payee", paw: "amountWords", pn: "nationalId", pan: "amountNumbers" };
+  for (var id in map) {
+    var n = $(id);
+    if (!n) continue;
+    var s = settings[map[id]];
+    n.style.top = s.top + "px";
+    n.style.left = s.left + "px";
+    n.style.fontSize = s.fontSize + "px";
   }
 }
-function preview(){
-  $("pd").textContent=$("date").value||"";
-  $("pdw").textContent=dateWords($("date").value||"");
-  $("pp").textContent=$("payee").value||"";
-  var aw=$("amtw").value||"";
-  $("paw").textContent=aw?(aw+" ریال"):"";
-  $("pn").textContent=$("nid").value||"";
-  $("pan").textContent=$("amt").value||"";
+
+function preview() {
+  $("pd").textContent = $("date").value || "";
+  $("pdw").textContent = dateWords($("date").value || "");
+  $("pp").textContent = $("payee").value || "";
+  var aw = $("amtw").value || "";
+  $("paw").textContent = aw ? (aw + " ریال") : "";
+  $("pn").textContent = $("nid").value || "";
+  $("pan").textContent = $("amt").value || "";
   applyPos();
 }
-var ones=["","یک","دو","سه","چهار","پنج","شش","هفت","هشت","نه"];
-var teens=["ده","یازده","دوازده","سیزده","چهارده","پانزده","شانزده","هفده","هجده","نوزده"];
-var tens=["","","بیست","سی","چهل","پنجاه","شصت","هفتاد","هشتاد","نود"];
-var hundreds=["","یکصد","دویست","سیصد","چهارصد","پانصد","ششصد","هفتصد","هشتصد","نهصد"];
-var thousands=["","هزار","میلیون","میلیارد"];
-var months=["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
-function lt1000(n){
-  var r="";
-  if(n>=100){r+=hundreds[Math.floor(n/100)];n%=100;if(n>0)r+=" و ";}
-  if(n>=20){r+=tens[Math.floor(n/10)];n%=10;if(n>0)r+=" و ";}
-  if(n>=10)return r+teens[n-10];
-  return r+ones[n];
+
+var ones = ["", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه"];
+var teens = ["ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده"];
+var tens = ["", "", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"];
+var hundreds = ["", "یکصد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"];
+var thousands = ["", "هزار", "میلیون", "میلیارد"];
+var months = ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"];
+
+function lt1000(n) {
+  var r = "";
+  if (n >= 100) {
+    r += hundreds[Math.floor(n / 100)];
+    n %= 100;
+    if (n > 0) r += " و ";
+  }
+  if (n >= 20) {
+    r += tens[Math.floor(n / 10)];
+    n %= 10;
+    if (n > 0) r += " و ";
+  }
+  if (n >= 10) return r + teens[n - 10];
+  return r + ones[n];
 }
-function numW(n){
-  if(n===0)return"صفر";
-  var r="",i=0;
-  while(n>0){
-    if(n%1000!==0)r=lt1000(n%1000)+" "+thousands[i]+(r?" و ":"")+r;
-    n=Math.floor(n/1000);i++;
+
+function numW(n) {
+  if (n === 0) return "صفر";
+  var r = "";
+  var i = 0;
+  while (n > 0) {
+    if (n % 1000 !== 0) r = lt1000(n % 1000) + " " + thousands[i] + (r ? " و " : "") + r;
+    n = Math.floor(n / 1000);
+    i++;
   }
   return r.trim();
 }
-function dateWords(d){
-  var p=eng(d).split("/");
-  if(p.length!==3)return"";
-  var y=+p[0],m=+p[1],a=+p[2];
-  if(!y||!m||!a)return"";
-  return numW(a)+" "+months[m-1]+" ماه سال "+numW(y);
+
+function dateWords(d) {
+  var p = eng(d).split("/");
+  if (p.length !== 3) return "";
+  var y = parseInt(p[0], 10);
+  var m = parseInt(p[1], 10);
+  var a = parseInt(p[2], 10);
+  if (!y || !m || !a) return "";
+  return numW(a) + " " + months[m - 1] + " ماه سال " + numW(y);
 }
-function renderCal(){
-  var labels={date:"تاریخ",dateWords:"تاریخ حروفی",payee:"در وجه",amountWords:"مبلغ حروفی",nationalId:"شناسه",amountNumbers:"مبلغ عددی"};
-  var h="";
-  for(var k in labels){
-    h+='<div style="border:1px solid #eee;border-radius:12px;padding:10px;margin-bottom:8px"><b>'+labels[k]+'</b>';
-    h+='<div class="r2"><div><label>بالا</label><input type="number" data-cal="'+k+'" data-f="top" value="'+settings[k].top+'"></div>';
-    h+='<div><label>چپ</label><input type="number" data-cal="'+k+'" data-f="left" value="'+settings[k].left+'"></div></div>';
-    h+='<label>فونت</label><input type="number" data-cal="'+k+'" data-f="fontSize" value="'+settings[k].fontSize+'"></div>';
+
+function renderCal() {
+  var labels = {
+    date: "تاریخ",
+    dateWords: "تاریخ حروفی",
+    payee: "در وجه",
+    amountWords: "مبلغ حروفی",
+    nationalId: "شناسه",
+    amountNumbers: "مبلغ عددی"
+  };
+  var h = "";
+  for (var k in labels) {
+    if (!Object.prototype.hasOwnProperty.call(labels, k)) continue;
+    h += "<div style=\"border:1px solid #eee;border-radius:12px;padding:10px;margin-bottom:8px\"><b>" + labels[k] + "</b>";
+    h += "<div class=\"r2\"><div><label>بالا</label><input type=\"number\" data-cal=\"" + k + "\" data-f=\"top\" value=\"" + settings[k].top + "\"></div>";
+    h += "<div><label>چپ</label><input type=\"number\" data-cal=\"" + k + "\" data-f=\"left\" value=\"" + settings[k].left + "\"></div></div>";
+    h += "<label>فونت</label><input type=\"number\" data-cal=\"" + k + "\" data-f=\"fontSize\" value=\"" + settings[k].fontSize + "\"></div>";
   }
-  $("calbox").innerHTML=h;
+  $("calbox").innerHTML = h;
 }
-function saveCheque(){
-  var series=v("series"), serial=v("serial");
-  if(!series||!serial){alert("سری و سریال را وارد کنید");return;}
-  var id=series+"/"+serial;
-  var data={chequeId:id,bankName:v("bank"),chequeSeries:series,chequeSerialNumber:serial,date:v("date"),payee:v("payee"),nationalId:v("nid"),amountNumbers:v("amt"),amountWords:v("amtw"),reminder:$("rem").checked,reminderDays:$("remd").value||"3",reminderShown:false};
-  var list=[];
-  try{list=JSON.parse(store.get("savedCheques")||"[]");}catch(e){list=[];}
-  var next=[];
-  for(var i=0;i<list.length;i++)if(list[i].chequeId!==id)next.push(list[i]);
+
+function saveCheque() {
+  var series = v("series");
+  var serial = v("serial");
+  if (!series || !serial) {
+    alert("سری و سریال را وارد کنید");
+    return;
+  }
+  var id = series + "/" + serial;
+  var data = {
+    chequeId: id,
+    bankName: v("bank"),
+    chequeSeries: series,
+    chequeSerialNumber: serial,
+    date: v("date"),
+    payee: v("payee"),
+    nationalId: v("nid"),
+    amountNumbers: v("amt"),
+    amountWords: v("amtw"),
+    reminder: $("rem").checked,
+    reminderDays: $("remd").value || "3",
+    reminderShown: false
+  };
+  var list = [];
+  try { list = JSON.parse(store.get("savedCheques") || "[]"); } catch (e) { list = []; }
+  var next = [];
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].chequeId !== id) next.push(list[i]);
+  }
   next.push(data);
-  store.set("savedCheques",JSON.stringify(next));
+  store.set("savedCheques", JSON.stringify(next));
   alert("ذخیره شد");
   renderList();
 }
-function renderList(){
-  var list=[];
-  try{list=JSON.parse(store.get("savedCheques")||"[]");}catch(e){list=[];}
-  var box=$("listbox");
-  if(!list.length){box.innerHTML="<p>هنوز چکی ذخیره نشده است.</p>";return;}
-  var h="<table><thead><tr><th>شماره</th><th>بانک</th><th>تاریخ</th><th>عملیات</th></tr></thead><tbody>";
-  for(var i=0;i<list.length;i++){
-    var c=list[i], sid=String(c.chequeId).split("'").join("");
-    h+="<tr><td>"+c.chequeId+"</td><td>"+(c.bankName||"")+"</td><td>"+(c.date||"")+"</td><td>";
-    h+='<button type="button" class="s" style="padding:6px 8px;font-size:.72rem" data-load="'+sid+'">بارگذاری</button> ';
-    h+='<button type="button" class="d" style="padding:6px 8px;font-size:.72rem" data-del="'+sid+'">حذف</button></td></tr>';
+
+function renderList() {
+  var list = [];
+  try { list = JSON.parse(store.get("savedCheques") || "[]"); } catch (e) { list = []; }
+  var box = $("listbox");
+  if (!list.length) {
+    box.innerHTML = "<p>هنوز چکی ذخیره نشده است.</p>";
+    return;
   }
-  h+="</tbody></table>";
-  box.innerHTML=h;
+  var h = "<table><thead><tr><th>شماره</th><th>بانک</th><th>تاریخ</th><th>عملیات</th></tr></thead><tbody>";
+  for (var i = 0; i < list.length; i++) {
+    var c = list[i];
+    var sid = String(c.chequeId).split("'").join("");
+    h += "<tr><td>" + c.chequeId + "</td><td>" + (c.bankName || "") + "</td><td>" + (c.date || "") + "</td><td>";
+    h += "<button type=\"button\" class=\"s\" style=\"padding:6px 8px;font-size:.72rem\" data-load=\"" + sid + "\">بارگذاری</button> ";
+    h += "<button type=\"button\" class=\"d\" style=\"padding:6px 8px;font-size:.72rem\" data-del=\"" + sid + "\">حذف</button></td></tr>";
+  }
+  h += "</tbody></table>";
+  box.innerHTML = h;
 }
-function loadCheque(id){
-  var list=[];
-  try{list=JSON.parse(store.get("savedCheques")||"[]");}catch(e){list=[];}
-  var c=null;
-  for(var i=0;i<list.length;i++)if(list[i].chequeId===id){c=list[i];break;}
-  if(!c)return;
-  $("bank").value=c.bankName||"";$("series").value=c.chequeSeries||"";$("serial").value=c.chequeSerialNumber||"";
-  $("date").value=c.date||"";$("payee").value=c.payee||"";$("nid").value=c.nationalId||"";
-  $("amt").value=c.amountNumbers||"";$("amtw").value=c.amountWords||"";
-  $("rem").checked=!!c.reminder;$("remd").value=c.reminderDays||3;
-  preview();go("new");
+
+function loadCheque(id) {
+  var list = [];
+  try { list = JSON.parse(store.get("savedCheques") || "[]"); } catch (e) { list = []; }
+  var c = null;
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].chequeId === id) { c = list[i]; break; }
+  }
+  if (!c) return;
+  $("bank").value = c.bankName || "";
+  $("series").value = c.chequeSeries || "";
+  $("serial").value = c.chequeSerialNumber || "";
+  $("date").value = c.date || "";
+  $("payee").value = c.payee || "";
+  $("nid").value = c.nationalId || "";
+  $("amt").value = c.amountNumbers || "";
+  $("amtw").value = c.amountWords || "";
+  $("rem").checked = !!c.reminder;
+  $("remd").value = c.reminderDays || 3;
+  preview();
+  go("new");
 }
-function delCheque(id){
-  if(!confirm("حذف شود؟"))return;
-  var list=[];
-  try{list=JSON.parse(store.get("savedCheques")||"[]");}catch(e){list=[];}
-  var next=[];
-  for(var i=0;i<list.length;i++)if(list[i].chequeId!==id)next.push(list[i]);
-  store.set("savedCheques",JSON.stringify(next));
+
+function delCheque(id) {
+  if (!confirm("حذف شود؟")) return;
+  var list = [];
+  try { list = JSON.parse(store.get("savedCheques") || "[]"); } catch (e) { list = []; }
+  var next = [];
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].chequeId !== id) next.push(list[i]);
+  }
+  store.set("savedCheques", JSON.stringify(next));
   renderList();
 }
-function genRep(){
-  var bn=v("fb"),se=v("fse"),sn=v("fsn"),sd=eng(v("fsd")),ed=eng(v("fed")),py=v("fp");
-  var list=[];
-  try{list=JSON.parse(store.get("savedCheques")||"[]");}catch(e){list=[];}
-  var f=[];
-  for(var i=0;i<list.length;i++){
-    var c=list[i],d=eng(c.date||"");
-    if(bn&&String(c.bankName||"").indexOf(bn)===-1)continue;
-    if(se&&String(c.chequeSeries||"").indexOf(se)===-1)continue;
-    if(sn&&String(c.chequeSerialNumber||"").indexOf(sn)===-1)continue;
-    if(sd&&d<sd)continue;
-    if(ed&&d>ed)continue;
-    if(py&&String(c.payee||"").indexOf(py)===-1)continue;
+
+function genRep() {
+  var bn = v("fb");
+  var se = v("fse");
+  var sn = v("fsn");
+  var sd = eng(v("fsd"));
+  var ed = eng(v("fed"));
+  var py = v("fp");
+  var list = [];
+  try { list = JSON.parse(store.get("savedCheques") || "[]"); } catch (e) { list = []; }
+  var f = [];
+  for (var i = 0; i < list.length; i++) {
+    var c = list[i];
+    var d = eng(c.date || "");
+    if (bn && String(c.bankName || "").indexOf(bn) === -1) continue;
+    if (se && String(c.chequeSeries || "").indexOf(se) === -1) continue;
+    if (sn && String(c.chequeSerialNumber || "").indexOf(sn) === -1) continue;
+    if (sd && d < sd) continue;
+    if (ed && d > ed) continue;
+    if (py && String(c.payee || "").indexOf(py) === -1) continue;
     f.push(c);
   }
-  if(!f.length){$("repbox").innerHTML="<p>موردی یافت نشد.</p>";return;}
-  var total=0,rows="";
-  for(var j=0;j<f.length;j++){
-    var a=Number(f[j].amountNumbers)||0;total+=a;
-    rows+="<tr><td>"+f[j].chequeId+"</td><td>"+(f[j].bankName||"")+"</td><td>"+(f[j].date||"")+"</td><td>"+(f[j].payee||"")+"</td><td>"+a.toLocaleString("fa-IR")+"</td></tr>";
+  if (!f.length) {
+    $("repbox").innerHTML = "<p>موردی یافت نشد.</p>";
+    return;
   }
-  $("repbox").innerHTML="<table><thead><tr><th>شماره</th><th>بانک</th><th>تاریخ</th><th>در وجه</th><th>مبلغ</th></tr></thead><tbody>"+rows+"</tbody><tfoot><tr><td colspan='4'>جمع</td><td>"+total.toLocaleString("fa-IR")+"</td></tr></tfoot></table>";
+  var total = 0;
+  var rows = "";
+  for (var j = 0; j < f.length; j++) {
+    var a = Number(f[j].amountNumbers) || 0;
+    total += a;
+    rows += "<tr><td>" + f[j].chequeId + "</td><td>" + (f[j].bankName || "") + "</td><td>" + (f[j].date || "") + "</td><td>" + (f[j].payee || "") + "</td><td>" + a.toLocaleString("fa-IR") + "</td></tr>";
+  }
+  $("repbox").innerHTML = "<table><thead><tr><th>شماره</th><th>بانک</th><th>تاریخ</th><th>در وجه</th><th>مبلغ</th></tr></thead><tbody>" + rows + "</tbody><tfoot><tr><td colspan=\"4\">جمع</td><td>" + total.toLocaleString("fa-IR") + "</td></tr></tfoot></table>";
 }
-function printCheque(){
+
+function printCheque() {
   preview();
-  var w=window.open("","_blank");
-  if(!w){alert("اجازه پاپ‌آپ بدهید");return;}
-  var end="<"+"/script>";
+  var w = window.open("", "_blank");
+  if (!w) {
+    alert("اجازه پاپ‌آپ بدهید");
+    return;
+  }
+  var openTag = "<" + "scr" + "ipt>";
+  var closeTag = "</" + "scr" + "ipt>";
   w.document.open();
-  w.document.write("<html dir='rtl'><head><meta charset='utf-8'><style>body{margin:0;font-family:Tahoma}#cbox{width:170mm;height:85mm;position:relative}.pr{position:absolute;font-weight:800;background:transparent!important}@page{size:170mm 85mm;margin:0}</style></head><body>");
+  w.document.write("<html dir=\"rtl\"><head><meta charset=\"utf-8\"><style>body{margin:0;font-family:Tahoma}#cbox{width:170mm;height:85mm;position:relative}.pr{position:absolute;font-weight:800;background:transparent!important}@page{size:170mm 85mm;margin:0}</style></head><body>");
   w.document.write($("cbox").outerHTML);
-  w.document.write("<script>setTimeout(function(){window.print();},350);"+end);
+  w.document.write(openTag + "setTimeout(function(){window.print();},350);" + closeTag);
   w.document.write("</body></html>");
   w.document.close();
 }
-document.body.addEventListener("click",function(e){
-  var t=e.target;
-  while(t&&t!==document.body){
-    if(t.getAttribute){
-      var goTo=t.getAttribute("data-go");
-      if(goTo){e.preventDefault();go(goTo);return;}
-      var act=t.getAttribute("data-act");
-      if(act==="print"){printCheque();return;}
-      if(act==="save"){saveCheque();return;}
-      if(act==="search"){genRep();return;}
-      if(act==="printrep"){genRep();var w=window.open("","_blank");if(w){w.document.write("<html dir='rtl'><body>"+$("repbox").innerHTML+"</body></html>");w.print();}}
-      if(act==="resetrep"){var ins=document.querySelectorAll("#sc-report input");for(var i=0;i<ins.length;i++)ins[i].value="";$("repbox").innerHTML="<p>برای مشاهده گزارش، جستجو کنید.</p>";}
-      if(act==="resetcal"){settings=JSON.parse(JSON.stringify(def));store.set(CK,JSON.stringify(settings));renderCal();preview();}
-      if(act==="backup"){var data={savedCheques:JSON.parse(store.get("savedCheques")||"[]"),chequeCalibrationV3:settings};var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:"application/json"}));a.download="cheque-backup.json";a.click();}
-      if(act==="copyid"){$("mid").select();document.execCommand("copy");alert("کپی شد");}
-      if(act==="activate"){var key=$("lkey").value.trim(),id=$("mid").value;if(key.length>=10){store.set(LK,key.toUpperCase());store.set("machine_bound",id);store.del(TK);alert("فعال شد");location.reload();}else alert("کلید نامعتبر");}
-      if(act==="closerem"){$("rmodal").classList.remove("on");}
-      var load=t.getAttribute("data-load");if(load){loadCheque(load);return;}
-      var del=t.getAttribute("data-del");if(del){delCheque(del);return;}
+
+function bind(id, fn) {
+  var el = $(id);
+  if (el) el.onclick = fn;
+}
+
+function boot() {
+  var ok = $("jsok");
+  if (ok) ok.style.display = "block";
+
+  bind("btn-new", function () { go("new"); });
+  bind("btn-list", function () { go("list"); });
+  bind("btn-report", function () { go("report"); });
+  bind("btn-print", function () { go("print"); });
+  bind("btn-calib", function () { go("calib"); });
+  bind("btn-backup", function () { go("backup"); });
+  bind("back1", function () { go("home"); });
+  bind("back2", function () { go("home"); });
+  bind("back3", function () { go("home"); });
+  bind("back4", function () { go("home"); });
+  bind("back5", function () { go("home"); });
+  bind("back6", function () { go("home"); });
+  bind("n-home", function () { go("home"); });
+  bind("n-new", function () { go("new"); });
+  bind("n-report", function () { go("report"); });
+  bind("n-list", function () { go("list"); });
+  bind("do-print", function () { printCheque(); });
+  bind("do-print2", function () { printCheque(); });
+  bind("do-save", function () { saveCheque(); });
+  bind("do-search", function () { genRep(); });
+  bind("do-printrep", function () {
+    genRep();
+    var w = window.open("", "_blank");
+    if (w) {
+      w.document.write("<html dir=\"rtl\"><body>" + $("repbox").innerHTML + "</body></html>");
+      w.print();
     }
-    t=t.parentNode;
-  }
-});
-document.body.addEventListener("input",function(e){
-  var t=e.target;if(!t)return;
-  if(t.id==="amt"){$("amtw").value=numW(Number(t.value)||0);preview();return;}
-  if(t.getAttribute&&t.getAttribute("data-cal")){
-    var k=t.getAttribute("data-cal"),f=t.getAttribute("data-f");
-    settings[k][f]=Number(t.value)||0;store.set(CK,JSON.stringify(settings));preview();return;
-  }
-  var ids=["bank","series","serial","date","payee","nid","amt","amtw"];
-  if(ids.indexOf(t.id)!==-1)preview();
-});
-$("rfile").addEventListener("change",function(e){
-  var f=e.target.files[0];if(!f)return;
-  var r=new FileReader();
-  r.onload=function(ev){
-    try{
-      var data=JSON.parse(ev.target.result);
-      if(!data.savedCheques)throw 0;
-      if(confirm("جایگزین شود؟")){
-        store.set("savedCheques",JSON.stringify(data.savedCheques));
-        if(data.chequeCalibrationV3){settings=data.chequeCalibrationV3;store.set(CK,JSON.stringify(settings));}
-        alert("بازیابی شد");location.reload();
+  });
+  bind("do-resetrep", function () {
+    var ins = document.querySelectorAll("#sc-report input");
+    for (var i = 0; i < ins.length; i++) ins[i].value = "";
+    $("repbox").innerHTML = "<p>برای مشاهده گزارش، جستجو کنید.</p>";
+  });
+  bind("do-resetcal", function () {
+    settings = JSON.parse(JSON.stringify(def));
+    store.set(CK, JSON.stringify(settings));
+    renderCal();
+    preview();
+  });
+  bind("do-backup", function () {
+    var data = {
+      savedCheques: JSON.parse(store.get("savedCheques") || "[]"),
+      chequeCalibrationV3: settings
+    };
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(data)], { type: "application/json" }));
+    a.download = "cheque-backup.json";
+    a.click();
+  });
+  bind("do-copyid", function () {
+    $("mid").select();
+    document.execCommand("copy");
+    alert("کپی شد");
+  });
+  bind("do-activate", function () {
+    var key = $("lkey").value.trim();
+    var id = $("mid").value;
+    if (key.length >= 10) {
+      store.set(LK, key.toUpperCase());
+      store.set("machine_bound", id);
+      store.del(TK);
+      alert("فعال شد");
+      location.reload();
+    } else alert("کلید نامعتبر");
+  });
+  bind("do-closerem", function () {
+    $("rmodal").classList.remove("on");
+  });
+  bind("to-new", function () { go("new"); });
+
+  document.body.addEventListener("click", function (e) {
+    var t = e.target;
+    while (t && t !== document.body) {
+      if (t.getAttribute) {
+        var load = t.getAttribute("data-load");
+        if (load) { loadCheque(load); return; }
+        var del = t.getAttribute("data-del");
+        if (del) { delCheque(del); return; }
       }
-    }catch(err){alert("فایل نامعتبر");}
-  };
-  r.readAsText(f);e.target.value="";
-});
-if(checkAct()){applyPos();preview();renderList();}
-})();
+      t = t.parentNode;
+    }
+  });
+
+  document.body.addEventListener("input", function (e) {
+    var t = e.target;
+    if (!t) return;
+    if (t.id === "amt") {
+      $("amtw").value = numW(Number(t.value) || 0);
+      preview();
+      return;
+    }
+    if (t.getAttribute && t.getAttribute("data-cal")) {
+      var k = t.getAttribute("data-cal");
+      var f = t.getAttribute("data-f");
+      settings[k][f] = Number(t.value) || 0;
+      store.set(CK, JSON.stringify(settings));
+      preview();
+      return;
+    }
+    var ids = ["bank", "series", "serial", "date", "payee", "nid", "amt", "amtw"];
+    if (ids.indexOf(t.id) !== -1) preview();
+  });
+
+  $("rfile").addEventListener("change", function (e) {
+    var f = e.target.files[0];
+    if (!f) return;
+    var r = new FileReader();
+    r.onload = function (ev) {
+      try {
+        var data = JSON.parse(ev.target.result);
+        if (!data.savedCheques) throw new Error("bad");
+        if (confirm("جایگزین شود؟")) {
+          store.set("savedCheques", JSON.stringify(data.savedCheques));
+          if (data.chequeCalibrationV3) {
+            settings = data.chequeCalibrationV3;
+            store.set(CK, JSON.stringify(settings));
+          }
+          alert("بازیابی شد");
+          location.reload();
+        }
+      } catch (err) {
+        alert("فایل نامعتبر");
+      }
+    };
+    r.readAsText(f);
+    e.target.value = "";
+  });
+
+  if (checkAct()) {
+    applyPos();
+    preview();
+    renderList();
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", boot);
+} else {
+  boot();
+}
 </script>
 </body>
 </html>
